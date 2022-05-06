@@ -17,5 +17,6 @@ while True:
     else:
         break
     attempts += 1
-    print("You have guessed " + str(attempts) + " times!")
-print("Congratulations! You win the game")
+    
+    print("You have guessed " + str(attempts)+1 + " times!")
+print("Congratulations! You win the game. It took you " +str(attempts) +" guesses")
