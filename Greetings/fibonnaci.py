@@ -8,3 +8,5 @@ print("How many numbers do you want to view?")
 noRange = int(input())
 for i in range(noRange):
     print(fib(i))
+
+#Uses recursion to calculate values in a sequence
