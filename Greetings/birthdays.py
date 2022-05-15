@@ -13,13 +13,20 @@ birthdays = {
 valid_dates = ('January', 'February', 'March', 'April','May', 'June', 'July', 'August', 
                 'September', 'October', 'November', 'December')
 
+def listValues(birthday_list):
+    for x, y in birthday_list: #Printing multiple values from a dictionary
+        #print('Key: ' + str(x) + ' Value: ' + str(y))
+        print('Key: ' + str(birthday_list.get(x, y)))
+
 while True:
     print('(Enter a name, (a)dd a new name or (q)uit')
     lookup_name = input()
     if(lookup_name == 'q'):
         break
+    elif(lookup_name == 'l'):
+        listValues(birthdays)
     else:
-        if lookup_name.lower() in birthdays:
+        if lookup_name.lower() in birthdays.keys():
             print(lookup_name[0].upper() + lookup_name[1:] + "'s birthday is on " + birthdays[lookup_name.lower()])
         else:
             print("I don't have birthday information for " + lookup_name + '.')
