@@ -11,17 +11,24 @@ import sys, pyperclip
 def addAccount(account):
     print('Please add a password')
     password = input()
-    PASSWORDS.setdefault(account, password)
+    PASSWORDS2.setdefault(account, password)
+    with open('passwords.txt', 'a') as x:
+            x.write(account +':' + password +'\n')
 
 with open('passwords.txt', 'r') as x:
         my_lines = x.read()
         new_list = my_lines.splitlines()
 
+
+
 PASSWORDS2 = {}
 for count, read_passwords in enumerate(new_list):
-    PASSWORDS2.setdefault(read_passwords[:read_passwords.index(':')],read_passwords[read_passwords.index(':')+1:])
+    try:
+        PASSWORDS2.setdefault(read_passwords[:read_passwords.index(':')],read_passwords[read_passwords.index(':')+1:])
+    except:
+        print('Password file is corrupted')
 
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
     print('Usage: py passwordManager.py [account] - copy account password')
     sys.exit()
 
