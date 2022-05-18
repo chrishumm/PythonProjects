@@ -17,7 +17,11 @@ def addToInventory(player_inventory, monster_loot):
             player_inventory.setdefault(k, i)
         else:
          player_inventory[k] += i
+"""
+This is some code describing something cool
 
+
+"""
 
 outputInvent(player_inventory)
 
