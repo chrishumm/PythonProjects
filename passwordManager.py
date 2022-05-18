@@ -38,14 +38,15 @@ if(masterPassword != 'pingas'):
     print('PINGAS')
     exit
 
-if account in PASSWORDS:
-    pyperclip.copy(PASSWORDS[account])
+if account in PASSWORDS2:
+    pyperclip.copy(PASSWORDS2[account])
     print('Password for ' + account + ' copied to clipboard.')
 else:
     print('There is no account named ' + account)
     print('You can (a)dd the account or (q)uit')
     response = input()
-    addAccount(account)
+    if(response == 'a'):
+        addAccount(account)
     
 
 
