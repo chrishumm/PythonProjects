@@ -1,3 +1,6 @@
+#! python3
+# phoneEmailExtractor.py - Extracts phone numbers and emails.
+
 import pyperclip, re
 
 copied_text = pyperclip.paste()
@@ -18,7 +21,7 @@ for count in range(len(list_of_phone_numbers)):
         phoneNum = ('0' + phoneNum[3:])
         matches.append(phoneNum)
     else:
-        matches.append(list_of_phone_numbers[count])
+            matches.append(list_of_phone_numbers[count])
 
 
 
