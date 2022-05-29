@@ -34,6 +34,7 @@ for questionNumber in range(noOfQuestions):
     while True:
         print(prompt)
         response = input()
+        
         if(inputString(response,number_1, number_2) == True):
             end_time = time.time()
             if checkTime(start_time, end_time) == False:
