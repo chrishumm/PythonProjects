@@ -11,10 +11,17 @@ mcbShelf = shelve.open('mbc')
 if len(sys.argv) == 3 and sys.argv[1] == 'save':
     mcbShelf[sys.argv[2]] = pyperclip.paste()
     print(mcbShelf[sys.argv[2]] + ' saved')
-
-
+elif(len(sys.argv) == 3 and sys.argv[1] == 'delete'):
+    
+    if(sys.argv[2] in mcbShelf):
+        print(mcbShelf[sys.argv[2]] + ' deleted!')
+        del mcbShelf[sys.argv[2]]
+    else:
+        print(sys.argv[2] + ' does not exist.')
+        
 elif(len(sys.argv) == 2):
     if(sys.argv[1].lower() == 'list'):
+        
         pyperclip.copy(str(list(mcbShelf.keys())))
         print()
     elif(sys.argv[1] in mcbShelf):
