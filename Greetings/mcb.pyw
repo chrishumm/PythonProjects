@@ -24,6 +24,9 @@ elif(len(sys.argv) == 2):
         
         pyperclip.copy(str(list(mcbShelf.keys())))
         print()
+    elif(sys.argv[1].lower() == 'deleteall'):
+        for size in mcbShelf:
+            del mcbShelf[size]
     elif(sys.argv[1] in mcbShelf):
         pyperclip.copy(mcbShelf[sys.argv[1]])
 
