@@ -1,0 +1,6 @@
+Border collies are dogs:true
+Fish can fly:false
+Dogs can run:true
+Human went to the moon:true
+Taiwan is in Europe:false
+The Bible is 100 years old:false

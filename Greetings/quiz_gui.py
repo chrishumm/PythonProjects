@@ -1,18 +1,33 @@
 
-from tabnanny import check
 import tkinter as tk
 import tkinter.font as tkFont
-    
+import re
+import random
+#from playsound import playsound
 app = tk.Tk()
 app.geometry("400x200")
 
 app.title("Countdown Quiz | Created by Chris Humm")
 app.config(bg='white')
 
-question = {'Border Collies are dogs': 'true', 'My name is Chris' :'true', 'My girlfriend is called Mei' : 'true'}
 
-counter = 10.0
 
+counter = 5.0
+
+def readQuestions():
+   question = {}
+   question_regex = re.compile(r"^[^:]*")
+   answer_regex = re.compile(r"[:]\w+")
+
+   with open('questions.txt', 'r') as question_file:
+      question_list = question_file.readlines()
+      test= question_regex.search(question_list[0]).group()
+      for x, y in enumerate(question_list):
+         question.update({question_regex.search(question_list[x]).group(): answer_regex.search(question_list[x]).group()[1:]})
+
+   question_file.close()
+   return question
+question = readQuestions()
 def counter_label(label):
   def count():
     global counter
@@ -26,44 +41,56 @@ def counter_label(label):
 
 
   count()
-def checkAnswerTrue(questionNumber, questionLabel, answerTally):
-  question.pop(list(question.keys())[questionNumber])
-  questionLabel.config(text=list(question.keys())[0])
+def checkAnswer(questionLabel, answerTally, user_response):
+  if(len(question) == 0):
+     print('No more questions')
+     return
+
   global correctAnswers
-  if list(question.values())[questionNumber] == 'true':
+  global inCorrectAnswers
+  global counter
+
+
+
+  if list(question.values())[0] == 'true' and user_response == 'true':
      print('Correct answer!') 
      correctAnswers+= 1
-     answerTally.config(text='Correct Answers: %s' %correctAnswers, fg='green')
-
+     answerTally.config(text='Correct Answers: %s\nIncorrect Answers: %s' %(correctAnswers,inCorrectAnswers) , fg='green')
+     #PlaySound("correct.wav")
+  elif list(question.values())[0] == 'false' and user_response == 'false':
+     print('Correct answer!') 
+     correctAnswers+= 1
+     answerTally.config(text='Correct Answers: %s\nIncorrect Answers: %s' %(correctAnswers,inCorrectAnswers) , fg='green')
+     #PlaySound("correct.wav")
   else:
+     inCorrectAnswers+=1
+     answerTally.config(text='Correct Answers: %s\nIncorrect Answers: %s' %(correctAnswers,inCorrectAnswers) , fg='green')
      print('Incorrect answer!')
+     #PlaySound("incorrect.wav")
+     
+  question.pop(list(question.keys())[0])
+  questionLabel.config(text=list(question.keys())[0])
 
-
-def checkAnswerFalse(questionNumber):
-   if list(question.values())[questionNumber] == 'false':
-       print('Correct answer!')
-   else:
-       print('Incorrect answer!')
-
-       question.pop(list(question.keys())[questionNumber])
-       questionLabel.config(text=list(question.keys())[0])
 
 questionLabel = tk.Label(app, text=list(question.keys())[0])
 questionLabel.pack()
 
 correctAnswers = 0
-answerTally = tk.Label(app, text='Correct Answers: %s' %correctAnswers)
+inCorrectAnswers = 0
+
+answerTally = tk.Label(app, text='Correct Answers: %s\nIncorrect Answers: %s' %(correctAnswers,inCorrectAnswers))
 answerTally.pack()
+
 trueButton = tk.Button(app,
                            text="TRUE",
                            width=10,
                            height=10,
-                           command= lambda: checkAnswerTrue(0, questionLabel,answerTally))
+                           command= lambda: checkAnswer(questionLabel,answerTally,"true"))
 falsebutton = tk.Button(app,
                            text="FALSE",
                            width=10,
                            height=10,
-                           command= lambda: checkAnswerTrue(0, questionLabel))
+                           command= lambda: checkAnswer(questionLabel,answerTally,"false"))
 
 trueButton.pack(side=tk.LEFT)
 falsebutton.pack(side=tk.RIGHT)
