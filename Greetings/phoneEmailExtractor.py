@@ -25,10 +25,7 @@ for count in range(len(list_of_phone_numbers)):
 
 
 
-'''8 Eastern Way
-Milford on Sea
-LYMINGTON
-SO41 0TB
+'''
 '''
 
 
