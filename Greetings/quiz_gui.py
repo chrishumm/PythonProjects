@@ -1,8 +1,11 @@
+#! python3
+# quiz_gui.py - true or false game written in tkinter
 
 import tkinter as tk
 import tkinter.font as tkFont
 import re
 import random
+
 #from playsound import playsound
 app = tk.Tk()
 app.geometry("400x200")
@@ -19,14 +22,22 @@ def readQuestions():
    question_regex = re.compile(r"^[^:]*")
    answer_regex = re.compile(r"[:]\w+")
 
-   with open('questions.txt', 'r') as question_file:
-      question_list = question_file.readlines()
-      test= question_regex.search(question_list[0]).group()
-      for x, y in enumerate(question_list):
-         question.update({question_regex.search(question_list[x]).group(): answer_regex.search(question_list[x]).group()[1:]})
-
-   question_file.close()
+   try:
+      with open('questions.txt', 'r') as question_file:
+         question_list = question_file.readlines()
+         test= question_regex.search(question_list[0]).group()
+         for x, y in enumerate(question_list):
+            question.update({question_regex.search(question_list[x]).group(): answer_regex.search(question_list[x]).group()[1:]})
+         
+         question_file.close()
+   except:
+      helloFile = open('questions.txt', 'w')
+      helloFile.write("London is the capital of England:true\nDogs can swim:true\nPigs can fly:false\n")
+      helloFile.close()
+      question = readQuestions()
+   
    return question
+
 question = readQuestions()
 def counter_label(label):
   def count():
