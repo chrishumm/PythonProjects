@@ -28,7 +28,7 @@ def printOutput( i):
 
 ## Main loop
 try:
-    while True: # The main program loo
+    while True: # The main program loop
         for i in my_name:
             printOutput(i)
             if increaseIndent:
