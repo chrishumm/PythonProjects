@@ -5,7 +5,7 @@ import tkinter as tk
 import tkinter.font as tkFont
 import re
 import random
-#add later include mp3
+#add later include mp3cd 
 #from playsound import playsound
 app = tk.Tk()
 app.geometry("400x200")
