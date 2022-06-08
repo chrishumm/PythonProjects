@@ -25,15 +25,15 @@ def readQuestions():
    try:
       with open('questions.txt', 'r') as question_file:
          question_list = question_file.readlines()
-         test= question_regex.search(question_list[0]).group()
          for x, y in enumerate(question_list):
             question.update({question_regex.search(question_list[x]).group(): answer_regex.search(question_list[x]).group()[1:]})
          
          question_file.close()
    except:
-      helloFile = open('questions.txt', 'w')
-      helloFile.write("London is the capital of England:true\nDogs can swim:true\nPigs can fly:false\n")
-      helloFile.close()
+      #Creates some dummy data if no file is found.
+      dummoyFile = open('questions.txt', 'w')
+      dummoyFile.write("London is the capital of England:true\nDogs can swim:true\nPigs can fly:false\n")
+      dummoyFile.close()
       question = readQuestions()
    
    return question
@@ -50,7 +50,6 @@ def counter_label(label):
         label.config(text=str(counter)[:3])
         label.after(100, count)
 
-
   count()
 def checkAnswer(questionLabel, answerTally, user_response):
   if(len(question) == 0):
@@ -60,8 +59,6 @@ def checkAnswer(questionLabel, answerTally, user_response):
   global correctAnswers
   global inCorrectAnswers
   global counter
-
-
 
   if list(question.values())[0] == 'true' and user_response == 'true':
      print('Correct answer!') 
